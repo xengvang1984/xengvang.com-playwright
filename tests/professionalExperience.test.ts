@@ -3,24 +3,28 @@ import { ProfessionalExperiencePage } from '../src/pages/professionalExperienceP
 import { NavigationPage } from '../src/pages/NavigationPage';
 import { NavigationHeaderLinkText } from '../src/types/navigationHeaderLinkText';
 import { FooterPage } from '../src/pages/FooterPage';
+import { HeaderPage } from '../src/pages/HeaderPage';
 
 
 test.describe('Professional Experience Page Tests', { tag: ['@professional-experience', '@regression'] }, () => {
   let professionalExperiencePage: ProfessionalExperiencePage;
   let navigationPage: NavigationPage;
   let footerPage: FooterPage;
+  let headerPage: HeaderPage;
 
   test.beforeEach(async ({ page }) => {
     professionalExperiencePage = new ProfessionalExperiencePage(page);
     navigationPage = new NavigationPage(page);
     footerPage = new FooterPage(page);
+    headerPage = new HeaderPage(page);
 
     await professionalExperiencePage.goToHomePage();
     await navigationPage.clickNavigationLink(NavigationHeaderLinkText.PROFESSIONAL_EXPERIENCE);
   });
 
-  test('Verify has correct page title and footer contents', { tag: '@professional-experience-title-verification' }, async ({ page }) => {
+  test('Verify has correct page title, header, and footer contents', { tag: '@professional-experience-title-verification' }, async ({ page }) => {
     await professionalExperiencePage.verifyPageTitle();
+    await headerPage.verifyContractsFloatingIcons();
     await footerPage.verifyLegalText();
     await footerPage.verifyAdditionalLegalText(true);
   });

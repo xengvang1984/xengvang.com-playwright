@@ -2,22 +2,26 @@ import { test } from '@playwright/test';
 import { NavigationPage } from '../src/pages/NavigationPage';
 import { FooterPage } from '../src/pages/FooterPage';
 import { InterestsPage } from '../src/pages/InterestsPage';
+import { HeaderPage } from '../src/pages/HeaderPage';
 
 
 test.describe('Interests Page Tests', { tag: ['@interests', '@regression'] }, () => {
   let interestsPage: InterestsPage;
   let navigationPage: NavigationPage;
   let footerPage: FooterPage;
+  let headerPage: HeaderPage;
 
   test.beforeEach(async ({ page }) => {
     interestsPage = new InterestsPage(page);
     navigationPage = new NavigationPage(page);
     footerPage = new FooterPage(page);
+    headerPage = new HeaderPage(page);
     await interestsPage.goTo();
   });
 
-  test('Verify has correct page title and footer contents', { tag: '@interests-title-verification' }, async ({ page }) => {
+  test('Verify has correct page title, header, and footer contents', { tag: '@interests-title-verification' }, async ({ page }) => {
     await interestsPage.verifyPageTitle();
+    await headerPage.verifyContractsFloatingIcons();
     await footerPage.verifyLegalText();
     await footerPage.verifyAdditionalLegalText(false);
   });

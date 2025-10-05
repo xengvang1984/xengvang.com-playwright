@@ -3,23 +3,27 @@ import { NavigationPage } from '../src/pages/NavigationPage';
 import { NavigationHeaderLinkText } from '../src/types/navigationHeaderLinkText';
 import { EducationPage } from '../src/pages/EducationPage';
 import { FooterPage } from '../src/pages/FooterPage';
+import { HeaderPage } from '../src/pages/HeaderPage';
 
 
 test.describe('Education Experience Page Tests', { tag: ['@education-experience', '@regression'] }, () => {
   let educationExperiencePage: EducationPage;
   let navigationPage: NavigationPage;
   let footerPage: FooterPage;
+  let headerPage: HeaderPage;
 
   test.beforeEach(async ({ page }) => {
     educationExperiencePage = new EducationPage(page);
     navigationPage = new NavigationPage(page);
     footerPage = new FooterPage(page);
+    headerPage = new HeaderPage(page);
     await educationExperiencePage.goToHomePage();
     await navigationPage.clickNavigationLink(NavigationHeaderLinkText.EDUCATION);
   });
 
-  test('Verify has correct page title and footer contents', { tag: '@education-experience-title-verification' }, async ({ page }) => {
+  test('Verify has correct page title, header, and footer contents', { tag: '@education-experience-title-verification' }, async ({ page }) => {
     await educationExperiencePage.verifyPageTitle();
+    await headerPage.verifyContractsFloatingIcons();
     await footerPage.verifyLegalText();
     await footerPage.verifyAdditionalLegalText(true);
   });

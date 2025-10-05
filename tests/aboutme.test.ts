@@ -1,20 +1,24 @@
 import { test } from '@playwright/test';
 import { AboutMePage } from '../src/pages/aboutMePage';
 import { FooterPage } from '../src/pages/FooterPage';
+import { HeaderPage } from '../src/pages/HeaderPage';
 
 
 test.describe('About Me Page Tests', { tag: ['@aboutme', '@regression'] }, () => {
   let aboutMePage: AboutMePage;
   let footerPage: FooterPage;
+  let headerPage: HeaderPage;
 
   test.beforeEach(async ({ page }) => {
     aboutMePage = new AboutMePage(page);
     footerPage = new FooterPage(page);
+    headerPage = new HeaderPage(page);
     await aboutMePage.goTo();
   });
 
-  test('Verify has correct page title and footer contents', { tag: '@aboutme-title-verification' }, async ({ page }) => {
+  test('Verify has correct page title, header, and footer contents', { tag: '@aboutme-title-verification' }, async ({ page }) => {
     await aboutMePage.verifyPageTitle();
+    await headerPage.verifyContractsFloatingIcons();
     await footerPage.verifyLegalText();
     await footerPage.verifyAdditionalLegalText(false);
   });
