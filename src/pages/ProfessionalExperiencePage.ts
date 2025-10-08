@@ -70,7 +70,9 @@ const EXPECTED_SKILLS_LIST = [
   'JIRA',
   'Confluence',
   'TestRail',
-  'Postman'
+  'Postman',
+  'Copilot',
+  'ChatGPT'
 ];
 
 // Expected professional experience list

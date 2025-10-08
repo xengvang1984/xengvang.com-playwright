@@ -17,6 +17,11 @@ const EXPECTED_SUB_URL = 'education';
 
 const EXPECTED_CERTIFICATION_IMAGES: Array<ImageValidation> = [
   {
+    alt: 'Microsoft GitHub Copilot Certification Image',  
+    src: '/images/github-copilot-certification.png',
+    class: 'white-png-background',
+  },
+  {
     alt: 'ASTQB Certification Image',  
     src: '/images/astqb-certification.svg',
     class: 'white-png-background',
@@ -44,6 +49,11 @@ const EXPECTED_CERTIFICATION_IMAGES: Array<ImageValidation> = [
 ];
 
 const EXPECTED_EDUCATION_EXPERIENCES = [
+  {
+    degree: 'GitHub Copilot Certification',
+    institution: 'Microsoft',
+    graduationDate: 'In Progress',
+  },
   {
     degree: 'IT Java Professional Developer Certificate Program',
     institution: 'Madison College',
@@ -143,7 +153,7 @@ export class EducationPage extends BasePage {
     await this.waitUntilPageLoaded();
     const educationExperienceList = await this.page.getByTestId('education-experience-list').locator('li');
     for (const experienceIndex in EXPECTED_EDUCATION_EXPERIENCES) {
-      const testIdIndex = Number(experienceIndex) + 1;
+      const testIdIndex = Number(experienceIndex);
       const schoolName = await this.page.getByTestId(`education-school-name-${testIdIndex}`).textContent();
       const certificationDegree = await this.page.getByTestId(`education-school-degree-${testIdIndex}`).textContent();
       const status = await this.page.getByTestId(`education-school-status-${testIdIndex}`).textContent();
